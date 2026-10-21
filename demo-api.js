@@ -1,9 +1,10 @@
 // Modo demo: simula a API do LabSystem no navegador.
 // Intercepta as chamadas para http://localhost:3000 e responde com as mesmas
 // rotas, validações e mensagens do back-end real, guardando os dados no localStorage.
+// A demo já abre logada como "demo"; o login só aparece depois de "Sair".
 (function () {
     const BASE = "http://localhost:3000";
-    const CHAVE = "labsystem-demo-v1";
+    const CHAVE = "labsystem-demo-v2";
     const CATEGORIAS = ["Hardware", "Periféricos", "Componentes", "Armazenamento", "Redes", "Informática", "Outros"];
     const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -41,7 +42,7 @@
             { id: 3, username: "carlos.m", password: "carlos123", name: "Carlos Mendes", email: "carlos@labsystem.dev", phone: "(11) 93333-4444", created_at: diasAtras(33, 11) }
         ];
 
-        return { produtos, usuarios, proximoProduto: produtos.length + 1, proximoUsuario: usuarios.length + 1, sessao: null };
+        return { produtos, usuarios, proximoProduto: produtos.length + 1, proximoUsuario: usuarios.length + 1, sessao: 1 };
     }
 
     // localStorage pode estar bloqueado (aba anônima, por exemplo): nesse caso os dados ficam só em memória
@@ -262,13 +263,12 @@
         faixa.setAttribute("role", "note");
         faixa.innerHTML = `
             <span><strong>Demo</strong> · dados de exemplo, salvos só no seu navegador</span>
-            <span>Login: <code>demo</code> / <code>demo123</code></span>
             <button type="button">Restaurar dados</button>
             <a href="https://github.com/NathanSouza-hub/labsystem" target="_blank" rel="noopener">Código ↗</a>
         `;
         faixa.querySelector("button").addEventListener("click", () => {
             resetar();
-            window.location.href = "login.html";
+            window.location.href = "index.html";
         });
         document.body.append(faixa);
         document.body.style.paddingBottom = "72px";
