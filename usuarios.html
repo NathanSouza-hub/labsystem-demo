@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LabSystem — Usuários</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="sidebar-brand-icon">◆</span>
+      <span class="sidebar-brand-text">LabSystem</span>
+      <button id="btn-menu" class="btn-menu" type="button" aria-label="Recolher ou expandir menu">‹</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link">
+        <span class="sidebar-link-icon">▤</span>
+        <span class="sidebar-link-text">Produtos</span>
+      </a>
+      <a href="usuarios.html" class="sidebar-link active">
+        <span class="sidebar-link-icon">☺</span>
+        <span class="sidebar-link-text">Usuários</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="app-content">
+    <header class="content-header">
+      <h1>Usuários</h1>
+      <button id="btn-novo">+ Novo Usuário</button>
+
+      <div class="perfil" id="perfil">
+        <button class="perfil-trigger" id="perfil-trigger" type="button" aria-label="Menu do usuário">
+          <span class="perfil-seta">⌄</span>
+        </button>
+
+        <div class="perfil-menu" id="perfil-menu">
+          <div class="perfil-menu-usuario" id="usuario-logado"></div>
+          <div class="perfil-menu-divisor"></div>
+          <button id="btn-logout" type="button">
+            <span>⏻</span> Sair
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <p id="mensagem" class="mensagem"></p>
+
+      <div class="toolbar">
+        <div class="campo-busca">
+          <input type="text" id="filtro-busca" placeholder="Buscar usuário">
+        </div>
+        <button id="btn-limpar-filtro" type="button">Limpar</button>
+      </div>
+
+      <div class="table-wrapper hidden" id="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="th-ordenavel" data-coluna="id">ID</th>
+              <th class="th-ordenavel" data-coluna="username">Usuário</th>
+              <th class="th-ordenavel" data-coluna="created_at">Data de Cadastro</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-usuarios">
+            <!-- linhas inseridas via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="estado-vazio hidden" id="estado-vazio">
+        <div class="estado-vazio-icone">👤</div>
+        <h2>Nenhum usuário cadastrado.</h2>
+        <p>Clique em "+ Novo Usuário" para iniciar.</p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div id="overlay" class="overlay">
+  <div class="modal">
+    <h2 id="modal-titulo">Novo Usuário</h2>
+
+    <form id="form-usuario">
+      <input type="hidden" id="usuario-id">
+
+      <label for="username">Usuário</label>
+      <input type="text" id="username" required>
+
+      <label for="password">Senha</label>
+      <input type="password" id="password" minlength="6">
+      <p class="campo-ajuda" id="ajuda-senha"></p>
+
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" required>
+
+      <label for="email">E-mail</label>
+      <input type="email" id="email" required>
+
+      <label for="telefone">Telefone</label>
+      <input type="text" id="telefone" required>
+
+      <p id="form-erros" class="erros"></p>
+
+      <div class="modal-botoes">
+        <button type="button" id="btn-cancelar">Cancelar</button>
+        <button type="submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="demo-api.js"></script>
+<script src="usuarios.js"></script>
+</body>
+</html>
